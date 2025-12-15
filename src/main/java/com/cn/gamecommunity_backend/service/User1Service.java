@@ -11,6 +11,7 @@ import java.util.List;
 public class User1Service {
     @Autowired
     private User1Mapper user1Mapper;
+
     public List<User1> getAllUser1s() {
         return user1Mapper.findAll();
     }

@@ -1,22 +1,19 @@
-package com.cn.gamecommunity.entity;
+package com.cn.gamecommunity_backend.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
-@TableName("user")
+@TableName("users")
 /**
  * 用户信息
  */
 @Data
-@Getter
-@Setter
 public class User implements Serializable {
 
     @Serial
@@ -72,9 +69,5 @@ public class User implements Serializable {
 
     @TableField(fill = FieldFill.INSERT_UPDATE) //插入和更新时填充字段
     private Long updateUser;
-
-    public Long getId() {
-        return id;
-    }
 
 }

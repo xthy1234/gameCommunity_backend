@@ -7,6 +7,14 @@ public class User1 {
     private char sex;
     private String phone;
 
+    public User1(String name, String account, String password, String phone, char sex) {
+        this.name = name;
+        this.account = account;
+        this.password = password;
+        this.phone = phone;
+        this.sex = sex;
+    }
+
     public String getName() {
         return name;
     }
@@ -45,13 +53,5 @@ public class User1 {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public User1(String name, String account, String password, String phone, char sex) {
-        this.name = name;
-        this.account = account;
-        this.password = password;
-        this.phone = phone;
-        this.sex = sex;
     }
 }

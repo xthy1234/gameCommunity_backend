@@ -11,6 +11,7 @@ public class GameCommunityController {
     public String hello() {
         return "Hello World! 这是我的第一个接口！";
     }
+
     @GetMapping("/help")
     public String help() {
         return "这是帮助页面";
