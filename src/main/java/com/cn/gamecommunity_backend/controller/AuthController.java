@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/api/auth")
+@RestController    //restful风格
+@RequestMapping("/api/auth")   //接口前缀
 public class AuthController {
-
+    //用户服务层
     private final UserService userService;
-
+    //JWT工具类
     private final JwtUtil jwtUtil;
 
     public AuthController(UserService userService, JwtUtil jwtUtil) {
@@ -34,11 +34,16 @@ public class AuthController {
     @PostMapping("/login")
     public Result<LoginVO> login(@Validated @RequestBody LoginDTO loginDTO) {
         try {
+            // 调用service层登录方法进行登录验证
             LoginVO loginVO = userService.login(loginDTO);
+            // 生成JWT令牌（有效7天）
             String token = jwtUtil.generateToken(loginVO.getUserInfo().getId(), loginVO.getUserInfo().getAccount(), 7);
+            // 设置令牌
             loginVO.setToken(token);
+            // 返回成功结果
             return Result.success(loginVO);
         } catch (Exception e) {
+            // 登录失败
             return Result.error(e.getMessage() + "用户名或密码错误");
         }
     }
@@ -50,9 +55,12 @@ public class AuthController {
     @PostMapping("/register")
     public Result<Void> register(@Validated @RequestBody RegisterDTO registerDTO) {
         try {
+            // 调用service层注册方法进行注册
             userService.register(registerDTO);
+            // 返回成功结果
             return Result.success();
         } catch (Exception e) {
+            // 注册失败
             return Result.error(e.getMessage());
         }
     }
@@ -69,9 +77,10 @@ public class AuthController {
             if (token != null && token.startsWith("Bearer ")) {
                 token = token.substring(7);
             }
-            if (token != null || !jwtUtil.validateToken(token)) {
+            if (token == null || !jwtUtil.validateToken(token)) {
                 return Result.error(401, "请先登录");
             }
+            //从token中获取账号信息
             String account = jwtUtil.getAccountFromToken(token);
             UserInfoVO userInfo = userService.getUserInfoByAccount(account);
             return Result.success(userInfo);
@@ -93,7 +102,7 @@ public class AuthController {
             if (token != null && token.startsWith("Bearer ")) {
                 token = token.substring(7);
             }
-            if (token != null || !jwtUtil.validateToken(token)) {
+            if (token == null || !jwtUtil.validateToken(token)) {
                 return Result.error(401, "请先登录");
             }
             String account = jwtUtil.getAccountFromToken(token);

@@ -6,8 +6,11 @@ import lombok.Data;
 
 @Data
 public class LoginVO {
-    private String token;  //JWT令牌
-    private UserInfoVO userInfo; //用户信息
+    //JWT令牌
+    private String token;
+    //用户信息
+    private UserInfoVO userInfo;
+    //过期时间（秒）
     private long empireTime;
 
 
