@@ -10,4 +10,5 @@ public class LoginVO {
     private UserInfoVO userInfo; //用户信息
     private long empireTime;
 
+
 }

@@ -25,4 +25,5 @@ public class UserInfoVO {
     private Long createUser;
     private Long updateUser;
 
+
 }
