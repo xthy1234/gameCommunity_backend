@@ -3,10 +3,12 @@ package com.cn.gamecommunity_backend.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.Getter;
+import org.apache.ibatis.type.JdbcType;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 @TableName("users")
@@ -35,7 +37,7 @@ public class User implements Serializable {
     private String password;
 
     //性别 F 女 M 男 U未知
-    private char sex;
+    private String sex;
 
     //手机号
     private String phone;
@@ -59,10 +61,10 @@ public class User implements Serializable {
     private Boolean isDeleted;
 
     @TableField(fill = FieldFill.INSERT) //插入时填充字段
-    private ZonedDateTime createTime;
+    private LocalDateTime createTime;
 
     @TableField(fill = FieldFill.INSERT_UPDATE) //插入和更新时填充字段
-    private ZonedDateTime updateTime;
+    private LocalDateTime updateTime;
 
     @TableField(fill = FieldFill.INSERT) //插入时填充字段
     private Long createUser;

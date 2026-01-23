@@ -21,7 +21,7 @@ public class RegisterDTO {
     private String email;
 
     @NotBlank(message = "密码不能为空")
-    @Size(min = 8, message = "密码长度不能小于8")
+    @Size(min = 6, message = "密码长度不能小于6")
     @Size(max = 20, message = "密码长度不能大于20")
     private String password;
 

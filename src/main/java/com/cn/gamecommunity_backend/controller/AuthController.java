@@ -55,6 +55,7 @@ public class AuthController {
     @PostMapping("/register")
     public Result<Void> register(@Validated @RequestBody RegisterDTO registerDTO) {
         try {
+            System.out.println(registerDTO);
             // 调用service层注册方法进行注册
             userService.register(registerDTO);
             // 返回成功结果

@@ -15,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
@@ -25,7 +28,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private JwtUtil jwtUtil;
 
     public LoginVO login(LoginDTO loginDTO) {
-        User user = userMapper.findByAccount(loginDTO.getUsername());
+        User user = userMapper.findByAccount(loginDTO.getAccount());
         //验证用户是否存在
         if (user == null) {
             throw new RuntimeException("用户不存在");
@@ -65,7 +68,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         BeanUtils.copyProperties(registerDTO, user);
         //保存用户
         user.setPassword(PasswordUtil.encode(user.getPassword()));
+        user.setName(user.getAccount());
+        user.setSex("U");
         user.setStatus(0);
+        user.setCreateUser(0L);
+        user.setUpdateUser(0L);
+        user.setCreateTime(LocalDateTime.now());
+        user.setUpdateTime(LocalDateTime.now());
+        user.setIsDeleted(false);
 
         user.setAvatar("https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png");
 

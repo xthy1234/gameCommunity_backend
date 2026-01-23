@@ -10,7 +10,7 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("select * from users where account = #{account}")
     User findByAccount(String account);
 
-    @Select("select count(*) from users where account = #{accoount}")
+    @Select("select count(*) from users where account = #{account}")
     Integer countByAccount(String username);
 
     @Select("select count(*) from users where email = #{email}")
