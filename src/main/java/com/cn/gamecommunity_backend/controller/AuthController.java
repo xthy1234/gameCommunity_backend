@@ -9,10 +9,7 @@ import com.cn.gamecommunity_backend.vo.Result;
 import com.cn.gamecommunity_backend.vo.UserInfoVO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController    //restful风格
 @RequestMapping("/api/auth")   //接口前缀
@@ -68,9 +65,9 @@ public class AuthController {
 
     /**
      * 获取用户信息
-     * GET /api/auth/info
+     * GET /api/auth/userinfo
      */
-    @PostMapping("/info")
+    @GetMapping("/userinfo")
     public Result<UserInfoVO> getUserInfo(HttpServletRequest request) {
         try {
             //从请求头中获取token
